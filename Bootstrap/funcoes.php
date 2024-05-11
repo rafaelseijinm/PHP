@@ -92,3 +92,73 @@
             echo "<h3>Número Inválido</h3>";
         }
     }
+
+    function metrosParaCentimetros($numero){
+        if(isset($_POST['numero']) && $_POST['numero'] != "")
+        {
+            $numero = $_POST['numero'];
+            $centimetros = $numero * 100;
+            echo "<h3>$numero metros são $centimetros centimetros. </h3>";
+        }
+        else{
+            echo "<h3>Número Inválido</h3>";
+        }
+    }
+
+    function pintarArea($numero){
+        if(isset($_POST['numero']) && $_POST['numero'] != "")
+        {
+            $numero = $_POST['numero'];
+            $litros = $numero / 3;
+            $latas = ceil($litros / 18);
+            $custo = $latas * 80;
+            echo "<h3>Serão necessárias $latas latas para pintar a área desejada. O Custo total será de R$ $custo</h3>";	
+        }
+        else{
+            echo "<h3>Número Inválido</h3>";
+        }
+    }
+
+    function calcularIdade($numero){
+        define ("ANO_ATUAL", 2024);
+
+        if(isset($_POST['numero']) && $_POST['numero'] != "")
+        {
+            $anoNascimento = $_POST['numero']; 
+            $idade = ANO_ATUAL - $anoNascimento;
+            $dias = $idade * 365;
+            $idade2025 = 2025 - $anoNascimento;
+            echo "<h3> Idade: $idade</h3>";
+            echo "<h3> Dias Vividos: $dias </h3>";
+            echo "<h3> Idade em 2025: $idade2025 </h3>";
+        }
+        else{
+            echo "<h3>Ano Inválido</h3>";
+        }
+    }
+
+    function calcularIMC($numero01, $numero02){
+        if(isset($_POST['numero01']) && $_POST['numero01'] != "" && isset($_POST['numero02']) && $_POST['numero02'] != "")
+        {
+            $numero01 = $_POST['numero01'];
+            $numero02 = $_POST['numero02'];
+            $alturaMetro = $numero02 / 100;
+            $imc = $numero01 / ($alturaMetro * $alturaMetro);
+            if($imc < 18.5)
+            {
+                echo "<h3> Abaixo do peso </h3>";
+            }elseif($imc >= 18.5 && $imc <= 24.9)
+            {
+                echo "<h3> IMC: $imc </h3>";
+                echo "<h3> Peso ideal </h3>";
+            }else
+            {
+                echo "<h3> IMC: $imc </h3>";
+                echo "<h3> Acima do Peso </h3>";
+            }
+            echo '<a href="https://www.tuasaude.com/imc/"><h3>Link para referência</h3></a>';
+        }
+        else{
+            echo "<h3>Dados inválidos</h3>";
+        }
+    }
