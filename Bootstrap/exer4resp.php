@@ -1,6 +1,6 @@
 <?php
     require_once "cabecalho.php";
 
-    echo "<p>Resposta: ".Tabuada($_POST['numero'])."</p>";
+    echo Tabuada($_POST['numero']);
 
     require_once "rodape.php";

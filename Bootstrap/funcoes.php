@@ -162,3 +162,21 @@
             echo "<h3>Dados inválidos</h3>";
         }
     }
+
+    function menorValor($valor1, $valor2, $valor3, $valor4, $valor5, $valor6, $valor7)
+        {
+            $menor = $_POST['valor1'];
+            if(isset($_POST['valor2']) && $_POST['valor2'] < $valor1)
+                $menor = $valor2;
+            if(isset($_POST['valor3']) && $_POST['valor3'] < $valor2)
+                $menor = $valor3;
+            if(isset($_POST['valor4']) && $_POST['valor4'] < $valor3)
+                $menor = $valor4;
+            if(isset($_POST['valor5']) && $_POST['valor5'] < $valor4)
+                $menor = $valor5;
+            if(isset($_POST['valor6']) && $_POST['valor6'] < $valor5)
+                $menor = $valor6;
+            if(isset($_POST['valor7']) && $_POST['valor7'] < $valor6)
+                $menor = $valor7;
+        echo "<h3> menor valor: $menor</h3>";
+        }

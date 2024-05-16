@@ -4,7 +4,7 @@
 <form action="exer9resp.php" method="post">
     <div class="row">
         <div class="col">
-            <label for="numero" class="form-label">Informe o em que vc nasceu: </label>
+            <label for="numero" class="form-label">Informe o ano em que vc nasceu: </label>
             <input type="number" class="form-control" name="numero"
             if="numero">
         </div>
