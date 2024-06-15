@@ -27,10 +27,10 @@
                 <label for="categoria" class="form-label"> Selecione a categoria</label>
                 <select class="form-select" name="categoria">
                     <?php
-                        $linhas = retornarCategorias();
-                        while($l = $linhas->fetch(PDO::FETCH_ASSOC)){
-                            echo "<option value='{$l['id']}'>{$l['descricaol']}</option>";
-                        }
+                       $linhas = retornarCategorias();
+                       while($l = $linhas->fetch(PDO::FETCH_ASSOC)){
+                        echo "<option value='{$l['id']}'>{$l['descricaol']}</option>";
+                       } 
                     ?>
                 </select>
             </div>
@@ -51,12 +51,12 @@
         $valor = $_POST['valor'];
         $categoria = $_POST['categoria'];
         if($nome != "" && $descricao != "" && $valor != "" && $categoria != ""){
-            if(inserirProduto($nome, $descricao, $valor, $categoria))
+            if(inserirProduto($nome,$descricao,$valor,$categoria))
                 echo "Registro inserido com sucesso!";
             else
                 echo "Erro ao inserir o registro!";
         } else {
-            echo "Preencha todos os campos zé!";
+            echo "Preencha todos os campos!";
         }
     }
     require_once("../rodape.php");

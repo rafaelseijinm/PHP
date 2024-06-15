@@ -18,7 +18,7 @@
         <tbody>
             <?php
                 $linhas = retornarProdutos();
-                while ($l = $linhas->fetch(PDO::FETCH_ASSOC)){ 
+                while ($l = $linhas->fetch(PDO::FETCH_ASSOC)){
             ?>
             <tr>
                 <td><?= $l['nome'] ?></td>
@@ -36,10 +36,10 @@
             </tr>
             <?php
                 }
-            ?>
+                ?>
         </tbody>
     </table>
     
 
-<?php
+    <?php
     require_once("../rodape.php");
