@@ -90,17 +90,18 @@
         }
     }
 
-    function cadastroConsultor($nome, $contato, $especialidade){
+    function cadastroConsultor($nome, $especialidade, $contato, $tarefa_id){
         try{ 
             //Defino uma variável para declarar o SQL a ser executado
-            $sql = "INSERT INTO consultor (nome, contato, especialidade)VALUES (:nome, :contato, :especialidade)";
+            $sql = "INSERT INTO consultor (nome, especialidade, contato, tarefa_id)VALUES (:nome, :especialidade, :contato, :tarefa_id)";
             //Realizo a conexão com o banco de dados
             $conexao = conectarBanco();
             //Inicio a preparação do SQL para poder substituir os APELIDOS pelos valores passados por parâmetro
             $stmt = $conexao->prepare($sql);
             $stmt->bindValue(":nome", $nome);
-            $stmt->bindValue(":contato", $contato);
             $stmt->bindValue(":especialidade", $especialidade);
+            $stmt->bindValue(":contato", $contato);
+            $stmt->bindValue(":tarefa_id", $tarefa_id);
             //Executo a consulta, retornando o seu resultado
             return $stmt->execute();
         } catch (Exception $e){
@@ -138,7 +139,7 @@
             $stmt = $conexao->prepare($sql);
             $stmt->bindValue(":nome", $nome);
             $stmt->bindValue(":dataConclusao", $dataConclusao);
-            $stmt->bindValue(":projeto", $projeto_id);
+            $stmt->bindValue(":projeto_id", $projeto_id);
             //Executo a consulta, retornando o seu resultado
             return $stmt->execute();
         } catch (Exception $e){
@@ -170,12 +171,48 @@
     function consultarConsultorId($id){
         try{ 
             //Defino uma variável para declarar o SQL a ser executado
-            $sql = "SELECT * FROM consultor WHERE id = :id";
+            $sql = "SELECT * FROM consultor WHERE codigo = :codigo";
             //Realizo a conexão com o banco de dados
             $conexao = conectarBanco();
             //Inicio a preparação do SQL para poder substituir os APELIDOS pelos valores passados por parâmetro
             $stmt = $conexao->prepare($sql);
-            $stmt->bindValue(":id", $id);
+            $stmt->bindValue(":codigo", $id);
+            //Executo a consulta
+            $stmt->execute();
+            //Retorno o registro já em formato de ARRAY
+            return $stmt->fetch();
+        } catch (Exception $e){
+            //Caso aconteça algum erro, retorno o valor 0
+            return 0;
+        }
+    }
+    function consultarProjetoId($codigo){
+        try{ 
+            //Defino uma variável para declarar o SQL a ser executado
+            $sql = "SELECT * FROM Projeto WHERE codigo = :codigo";
+            //Realizo a conexão com o banco de dados
+            $conexao = conectarBanco();
+            //Inicio a preparação do SQL para poder substituir os APELIDOS pelos valores passados por parâmetro
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":codigo", $codigo);
+            //Executo a consulta
+            $stmt->execute();
+            //Retorno o registro já em formato de ARRAY
+            return $stmt->fetch();
+        } catch (Exception $e){
+            //Caso aconteça algum erro, retorno o valor 0
+            return 0;
+        }
+    }
+    function consultarTarefaId($codigo){
+        try{ 
+            //Defino uma variável para declarar o SQL a ser executado
+            $sql = "SELECT * FROM Tarefa WHERE tarefa_id = :codigo";
+            //Realizo a conexão com o banco de dados
+            $conexao = conectarBanco();
+            //Inicio a preparação do SQL para poder substituir os APELIDOS pelos valores passados por parâmetro
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":codigo", $codigo);
             //Executo a consulta
             $stmt->execute();
             //Retorno o registro já em formato de ARRAY
@@ -246,18 +283,18 @@
         }
     }
 
-    function alterarTarefa($nome, $descricao, $dataInicio, $codigo){
+    function alterarTarefa($nome, $dataConclusao, $projeto_id, $tarefa_id){
         try{ 
             //Defino uma variável para declarar o SQL a ser executado
-            $sql = "UPDATE Projeto SET nome = :nome, descricao = :descricao, dataInicio = :dataInicio WHERE codigo = :codigo";
+            $sql = "UPDATE Tarefa SET nome = :nome, dataConclusao = :dataConclusao, projeto_id = :projeto_id WHERE tarefa_id = :tarefa_id";
             //Realizo a conexão com o banco de dados
             $conexao = conectarBanco();
             //Inicio a preparação do SQL para poder substituir os APELIDOS pelos valores passados por parâmetro
             $stmt = $conexao->prepare($sql);
             $stmt->bindValue(":nome", $nome);
-            $stmt->bindValue(":descricao", $descricao);
-            $stmt->bindValue(":dataInicio", $dataInicio);
-            $stmt->bindValue(":codigo", $codigo);
+            $stmt->bindValue(":dataConclusao", $dataConclusao);
+            $stmt->bindValue(":projeto_id", $projeto_id);
+            $stmt->bindValue(":tarefa_id", $tarefa_id);
             //Executo a consulta, retornando o seu resultado
             return $stmt->execute();
         } catch (Exception $e){

@@ -1,17 +1,16 @@
 <?php
     require_once("../cabecalho.php");
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if (isset($_GET['codigo'])) {
+        $codigo = $_GET['codigo'];
         session_start();
-        $_SESSION['id'] = $id;
+        $_SESSION['codigo'] = $codigo;
     } else
-        $id = $_SESSION['id'];
+        $codigo = $_SESSION['codigo'];
     if ($_POST){
         $nome = $_POST['nome'];
         $descricao = $_POST['descricao'];
         $dataInicio = $_POST['dataInicio'];
-        $categoria = $_POST['categoria'];
-        if($nome != "" && $descricao != "" && $dataInicio != "" && $categoria != ""){
+        if($nome != "" && $descricao != "" && $dataInicio != ""){
             if(AlterarProjeto($nome,$descricao,$dataInicio,$_SESSION['codigo']))
                 echo "Registro alterado com sucesso!";
             else
@@ -20,7 +19,7 @@
             echo "Preencha todos os campos!";
         }
     }
-    $dados = consultarClienteId($id);
+    $dados = consultarProjetoId($codigo);
 ?>
 
     <h3>Alterar Projeto</h3>

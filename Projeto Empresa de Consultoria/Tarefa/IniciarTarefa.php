@@ -23,7 +23,7 @@
                     <?php
                        $linhas = retornarProjetos();
                        while($l = $linhas->fetch(PDO::FETCH_ASSOC)){
-                        echo "<option value='{$l['projeto_id']}'>{$l['codigo']}</option>";
+                        echo "<option value='{$l['codigo']}'>{$l['codigo']}</option>";
                        } 
                     ?>
                 </select>

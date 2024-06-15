@@ -9,6 +9,7 @@
     <table class="mt-3 table table-hover table-striped">
         <thead>
             <tr>
+                <th>Código da Tarefa</th>
                 <th>Nome da Tarefa</th>
                 <th>Data de Conclusão</th>
                 <th>Categoria</th>
@@ -23,11 +24,12 @@
                 while ($l = $linhas->fetch(PDO::FETCH_ASSOC)){
             ?>
             <tr>
+                <td><?= $l['tarefa_id'] ?></td>
                 <td><?= $l['nome'] ?></td>
                 <td><?= $l['dataConclusao'] ?></td>
-                <td><?= $l['codigo'] ?></td>
+                <td><?= $l['projeto_id'] ?></td>
                 <td>
-                    <a href="AlterarTarefa.php?codigo=<?= $l['codigo'] ?>" class="btn btn-warning"> Alterar </a>
+                    <a href="AlterarTarefa.php?tarefa_id=<?= $l['tarefa_id'] ?>" class="btn btn-warning"> Alterar </a>
                 </td>
             </tr>
             <?php

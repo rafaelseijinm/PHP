@@ -8,11 +8,10 @@
         $tarefa_id = $_SESSION['tarefa_id'];
     if ($_POST){
         $nome = $_POST['nome'];
-        $telefone = $_POST['telefone'];
-        $email = $_POST['email'];
-        $categoria = $_POST['categoria'];
-        if($nome != "" && $telefone != "" && $email != "" && $categoria != ""){
-            if(AlterarCadastroCliente($nome,$telefone,$email,$_SESSION['tarefa_id']))
+        $dataConclusao = $_POST['dataConclusao'];
+        $projeto_id = $_POST['projeto_id'];
+        if($nome != "" && $dataConclusao != "" && $projeto_id != ""){
+            if(alterarTarefa($nome, $dataConclusao, $projeto_id, $_SESSION['tarefa_id']))
                 echo "Registro alterado com sucesso!";
             else
                 echo "Erro ao alterar o registro!";
@@ -20,7 +19,7 @@
             echo "Preencha todos os campos!";
         }
     }
-    $dados = consultarClienteId($id);
+    $dados = consultarTarefaId($tarefa_id);
 ?>
 
     <h3>Alterar Tarefa</h3>
@@ -37,6 +36,20 @@
                 <label for="dataConclusao" class="form-label">Informe a data de conclusão</label>
                 <input type="text" class="form-control"     name="dataConclusao" value="<?= $dados['dataConclusao'] ?>">
             </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="projeto_id" class="form-label"> Selecione o projeto</label>
+                <select class="form-select" name="projeto_id">
+                    <?php
+                       $linhas = retornarProjetos();
+                       while($l = $linhas->fetch(PDO::FETCH_ASSOC)){
+                        echo "<option value='{$l['codigo']}'>{$l['codigo']}</option>";
+                       } 
+                    ?>
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="col">
                 <button type="submit" class="btn btn-success">

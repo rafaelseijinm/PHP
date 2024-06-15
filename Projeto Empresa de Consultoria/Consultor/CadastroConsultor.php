@@ -18,8 +18,21 @@
         </div>
         <div class="row">
             <div class="col">
-                <label for="email" class="form-label">Informe o e-mail</label>
-                <input type="text" class="form-control" name="email">
+                <label for="contato" class="form-label">Informe o contato</label>
+                <input type="text" class="form-control" name="contato">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="tarefa_id" class="form-label"> Selecione a tarefa</label>
+                <select class="form-select" name="tarefa_id">
+                    <?php
+                       $linhas = retornarTarefas();
+                       while($l = $linhas->fetch(PDO::FETCH_ASSOC)){
+                        echo "<option value='{$l['tarefa_id']}'>{$l['tarefa_id']}</option>";
+                       } 
+                    ?>
+                </select>
             </div>
         </div>
         <div class="row">
@@ -35,9 +48,10 @@
     if ($_POST){
         $nome = $_POST['nome'];
         $especialidade = $_POST['especialidade'];
-        $email = $_POST['email'];
-        if($nome != "" && $especialidade != "" && $email != ""){
-            if(CadastroConsultor($nome,$especialidade,$email))
+        $contato = $_POST['contato'];
+        $tarefa_id = $_POST['tarefa_id'];
+        if($nome != "" && $especialidade != "" && $contato != "" && $tarefa_id != ""){
+            if(CadastroConsultor($nome,$especialidade,$contato, $tarefa_id))
                 echo "Consultor registrado com sucesso!";
             else
                 echo "Erro ao cadastrar consultor!";

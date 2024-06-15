@@ -1,18 +1,18 @@
 <?php
     require_once("../cabecalho.php");
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+    if (isset($_GET['codigo'])) {
+        $codigo = $_GET['codigo'];
         session_start();
-        $_SESSION['id'] = $id;
+        $_SESSION['codigo'] = $codigo;
     } else
-        $id = $_SESSION['id'];
+        $codigo = $_SESSION['codigo'];
     if ($_POST){
         $nome = $_POST['nome'];
         $telefone = $_POST['telefone'];
         $email = $_POST['email'];
         $tarefa_id = $_POST['tarefa_id'];
         if($nome != "" && $telefone != "" && $email != "" && $tarefa_id != ""){
-            if(AlterarCadastroConsultor($nome,$telefone,$email,$tarefa_id,$_SESSION['tarefa_']))
+            if(AlterarCadastroConsultor($nome,$telefone,$email,$tarefa_id,$_SESSION['tarefa_id']))
                 echo "Registro alterado com sucesso!";
             else
                 echo "Erro ao alterar o registro!";
@@ -20,7 +20,7 @@
             echo "Preencha todos os campos!";
         }
     }
-    $dados = consultarClienteId($id);
+    $dados = consultarClienteId($codigo);
 ?>
 
     <h3>Alterar Produto</h3>
